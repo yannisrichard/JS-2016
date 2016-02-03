@@ -1,18 +1,39 @@
 class Dal
 {
-	constructor()
-	{
+	constructor(){
 		this.episodes = new Map();
-		this.episodes.set(1 => { 'season' : 1, 'title' : 'Breaking Bad', 'episode' : 1 });
-		this.episodes.set(2 => { 'season' : 1, 'title' : 'Breaking Bad', 'episode' : 2 });
+		//~ this.episodes.set(1, JSON.parse('{ "season" : 1, "title" : "Toto en vacances", "episode" : 1 }'));
 	}
 
-	function getAll()
+	getRandomId(){
+		return Math.random().toString(36).substring(7);
+	}
+
+	getAll()
 	{
-		return this.episodes;
+		if(this.episodes.size == 0){
+			return null;
+		}
+
+		return [...this.episodes];
 	}
 
-	exports.getAll = getAll;	
+	add(episode){
+		var id = this.getRandomId(); 
+		episode.id = id;
+		this.episodes.set(id, episode);
+		
+		return this.episodes.get(id);
+	}
+
+	getEpisodeById(id){
+		if(this.episodes.has(id)){
+			return this.episodes.get(id);
+		}
+		else{
+			return null;		
+		}		
+	}
 }
 
-module.exports Dal
+module.exports = Dal

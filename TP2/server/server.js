@@ -1,32 +1,38 @@
-require("./Router");
-require("./Controller");
-
+var http = require("http");
+var Router = require("./router");
+var Controller = require("./controller");
 
 function start(port){
-	//créer server
-	//créer route
-	//handle de la route
-	var http = require("http");
-	var routeur = new Router();
+
+	var router = new Router();
 	var controller = new Controller();
-	
-	routeur.addGet("/", function(request, response){
-		//Code action du controller
-		controller.index(request, response);
+
+	router.addGet('/',function(request,response){
+		controller.index(request,response);
 	});
-	routeur.addGet("/episode", function(request, response){
-		//Code action du controller
-		controller.getEpisode(request, response);
+
+	router.addGet('/episode',function(request,response){
+		controller.getEpisode(request,response);
 	});
-	routeur.addPost("/", function(request, response){
-		//Code action du controller
-		
+
+	router.addPost('/',function(request,response){
+		controller.post(request,response);
+	});
+
+	router.addGet('/count',function(request,response){
+		controller.count(request,response);
 	});
 	
 	http.createServer(function(request, response) {
-		router.handle(request, response);
+
+	    router.handle(request,response);  
+	
 	}).listen(port);
-	console.log("Start Server " + port);
+
+	console.log("Start server... port : " + port);
 }
 
-exports.start = start;
+
+exports.start = start
+
+

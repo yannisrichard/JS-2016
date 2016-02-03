@@ -1,54 +1,53 @@
-//Debuter par router.js
-//3 méthodes handle(REquest, Response)
-//addGet(path, callback)
-//addPost(path, callback)
-//this.posts = new Map() 2Map à faire une pour post et l'autre pour get
-//addPOST 
-//	this.posts.set(path, callback);
+var url = require('url');
 
-class Router {
+class Router
+{
+	constructor(){
+		this.get = new Map();
+		this.post = new Map();
+	}
 	
-	constructor( )
-	{
-		this.posts = new Map();
-		this.gets = new Map();
-	}
-
-	function handle (Request, Response)
-	{
-		var url = require('url');
-		var pathname = url.parse(request.url).pathname;
+	handle(request,response){
 		
-		switch (request.Response) {
-			case GET :
-				if (this.gets.has(pathname))
-					this.gets.get(pathname)(request, response);
-				else
-					response.writeHead(404);
-				break;
-			case POST :
-				if (this.posts.has(pathname))
-					this.posts.get(pathname)(request, response);
-				else
-					response.writeHead(404);
-				break;
+		var pathname = url.parse(request.url).pathname;
+		switch(request.method)
+		{
+			case 'GET' :
+			if(this.get.has(pathname)){
+	 			this.get.get(pathname)(request,response);
+			}
+			else{
+				response.writeHead(404, {"Content-Type": "text/html"});
+				response.write('<html><body>La page n\'existe pas</body></html>');
+				response.end();
+			}
+			break;
+			case 'POST' :
+			if(this.post.has(pathname)){
+				this.post.get(pathname)(request,response);
+			}
+			else{
+				response.writeHead(404, {"Content-Type": "text/html"});
+				response.write('<html><body>La page n\'existe pas</body></html>');
+				response.end();
+			}
+			break;
 			default :
-				response.writeHead(405);
-				break;
+			response.writeHead(405, {"Content-Type": "text/html"});
+			response.write('<html><body>La méthode n\'est pas disponible</body></html>');
+			response.end();
+			break;
 		}
-		response.end;		 
+	}
+	
+	addGet(path,callback){
+		this.get.set(path, callback);
 	}
 
-	function addGet (path, callback)
-	{
-		this.posts.set(path, callback);
-	}
-
-	function addPost(path, callback)
-	{
-		this.gets.set(path, callback);
+	addPost(path,callback){
+		this.post.set(path,callback);
 	}
 
 }
 
-module.exports Router
+module.exports = Router

@@ -1,27 +1,59 @@
-//Classe methode qui sont des actions
-require("./Dal");
+var Dal = require("./dal");
+var url = require('url');
 
-class Controller {
-	
-	constructor( )
-	{
-		var dal = new Dal();
-	}
-
-	function index (Request, Response)
-	{
-		//~ response.writeHead(200, {"Content-Type": "application/html"});
-		//~ response.write('<html><body>Index : All episodes</body></html>');
-		dal.getAll();
-		console.log(dal.getAll());
+class Controller
+{
+	constructor(){
+		this.dal = new Dal();
 	}
 	
-	function getEpisode (Request, Response)
-	{
-		//~ response.writeHead(200, {"Content-Type": "application/html"});
+	index(request,response){
+		if(this.dal.getAll() === null){
+			response.writeHead(204, {"Content-Type": "application/json"});
+			response.write("<html><body> Vide </body></html>");
+			response.end();
+		}
+		else{
+			response.writeHead(200, {"Content-Type": "application/json"});
+			response.write(JSON.stringify(this.dal.getAll()));
+			response.end();
+		}
 	}
 
+	post(request,response){
+		var dal = this.dal;
 
+		request.on('data', function(data){
+			
+			var object = JSON.parse(data);
+			var objectWithId = dal.add(object);
+			
+			response.writeHead(201, {"Content-Type": "application/json"});
+			response.write(JSON.stringify(objectWithId));
+			response.end();
+		});
+
+		request.on('end',function(){
+			
+		});		
+	}
+
+	getEpisode(request,response){
+		
+		var parsedUrl = url.parse(request.url, true);
+		var queryAsObject = parsedUrl.query;	
+
+		var episode = this.dal.getEpisodeById(queryAsObject.id);
+		if(episode === null){
+			response.writeHead(404, {"Content-Type": "application/json"});
+			response.end();
+		}
+		else{
+			response.writeHead(200, {"Content-Type": "application/json"});
+			response.write(JSON.stringify(episode));
+			response.end();
+		}
+	}
 }
 
-module.exports Controller
+module.exports = Controller
