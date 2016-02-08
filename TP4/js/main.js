@@ -1,19 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
+//Faire un import afin d'inclure le component.
+import { Liste } from './listComponent.js' 
+import { ItemListe } from './itemListComponent.js'
+import { AddForm } from './formComponent.js'
+import { ButtonForm } from './buttonComponent.js'
 
-class Tutu
-{
-    alert() {
-        console.log('Test Class');
-    }
-}
-
-var t = new Tutu();
-
-console.log('test basic');
-
-t.alert();
-
+/*
 fetch('http://localhost:9312', {
     method: 'get'
 }).then(function(response) {
@@ -101,6 +94,7 @@ var FormComponent = React.createClass({
 
 
 render(<Container/>, document.getElementById('content'));
+*/
 
 
 

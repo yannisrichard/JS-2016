@@ -1,3 +1,27 @@
+body {
+	font-size: 20px;
+	padding: 50px;
+}
+
+#tabEpisodes thead tr td {
+	font-weight: bold;
+}
+
+#content, #ensemble-form {
+	display: inline-block;
+}
+
+table td {
+	width: 200px;
+}
+
+#bouton {
+	font-size: 15px;
+	color: blue;
+	padding: 8px;
+	border-radius: 5px;
+}
+
 .container
 {
 	width: 1024px;
@@ -40,3 +64,4 @@
 	left: 750px;
 	padding: 20px;
 }
+
