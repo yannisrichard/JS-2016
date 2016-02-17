@@ -9,12 +9,12 @@ class Controller
 	
 	index(request,response){
 		if(this.dal.getAll() === null){
-			response.writeHead(204, {"Content-Type": "application/json"});
+			response.writeHead(204, {"Content-Type": "application/json", });
 			response.write("<html><body> Vide </body></html>");
 			response.end();
 		}
 		else{
-			response.writeHead(200, {"Content-Type": "application/json"});
+			response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*" , "Access-Control-Allow-Headers": "X-Requested-With" });
 			response.write(JSON.stringify(this.dal.getAll()));
 			response.end();
 		}

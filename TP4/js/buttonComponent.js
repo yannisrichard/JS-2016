@@ -24,4 +24,5 @@ var ButtonForm = React.createClass({
   }
 });
 
+
 render(<ButtonForm />, document.getElementById('formulaire-button'));

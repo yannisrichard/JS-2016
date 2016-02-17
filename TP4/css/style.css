@@ -34,34 +34,49 @@ table td {
 .table
 {
 	text-align: center;
-	width: 70%;
+	width: 100%;
 	height: auto;
 	background: #999999;
 }
 
 .th__head{
-	padding: 10px 68px 10px 68px;
-	border-bottom-style: dotted;
-	border-bottom-width: 2px;
-	border-bottom-color: #000000;
+	background-color: #EEEEEE;
+	padding: 10px 110px 10px 90px;
 }
 
 .td__content{
-	padding: 5px 68px 5px 68px;
-	border-bottom-style: dotted;
-	border-bottom-width: 1px;
-	border-bottom-color: #000000;
+	padding: 10px 100px 10px 100px;
 }
 
 .form
 {	
 	text-align: center;
-	width: 20%;
+	width: 100%;
 	height: auto;
 	background: #888888;
-	position: relative;
-	top: -45px;
-	left: 750px;
 	padding: 20px;
 }
+
+
+/*******************************************/
+/*****************RESPONSIVE****************/
+/*******************************************/
+
+@media screen and (max-width: 1024px)
+{
+
+}
+
+@media screen and (max-width: 920px)
+{
+
+	
+}
+
+
+@media screen and (max-width: 514px)
+{
+
+}
+
 
